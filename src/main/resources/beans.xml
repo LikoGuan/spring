@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:whx="http://whx4j8.github.io/people"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+            http://whx4j8.github.io/people http://whx4j8.github.io/people.xsd"
+       default-autowire="byType">
+
+
+    <context:component-scan base-package="com.liko.spring" />
+
+    <whx:people id="people" name="whx" age="22"></whx:people>
+
+    <!--bean id="speaker" class="com.liko.spring.Speaker" autowire="byName"-->
+    <!--bean id="speaker" class="com.liko.spring.Speaker" autowire="byType"-->
+    <bean id="speaker" class="com.liko.spring.Speaker">
+        <property name="name" value="liko"/>
+        <property name="content" value="I love Spring"/>
+    </bean>
+
+    <bean id="address" class="com.liko.spring.Address">
+        <property name="country" value="China"/>
+        <property name="city" value="Hangzhou"/>
+        <property name="street" value="Liuxia"/>
+    </bean>
+
+    <!--<bean id="talk" class="com.liko.spring.TalkService"/>-->
+
+    <!--subclass of FactoryBean-->
+    <bean id="carFactoryBean" class="com.liko.spring.CarFactoryBean">
+    </bean>
+
+    <!--static factory-->
+    <bean id="bed1" class="com.liko.spring.BedStaticFactory" factory-method="createBed">
+    </bean>
+
+    <!--non-static factory-->
+    <bean id="bedNonStaticFactory" class="com.liko.spring.BedNonStaticFactory">
+    </bean>
+    <bean id="bed2" factory-bean="bedNonStaticFactory" factory-method="createBed">
+    </bean>
+
+    <bean id="mobile" class="com.liko.spring.Mobile" init-method="initMethod" destroy-method="destroyMethod">
+        <property name="price" value="399"></property>
+    </bean>
+    <bean id="xBeanPostProcessor" class="com.liko.spring.XBeanPostProcessor"></bean>
+
+    <bean id="eventPublisher" class="com.liko.spring.EventPublisher"></bean>
+</beans>
