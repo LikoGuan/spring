@@ -30,15 +30,18 @@ public class MainApp {
 //
 //        People people = (People) applicationContext.getBean("people");
 //
-//        Speaker speaker = (Speaker)applicationContext.getBean("speaker");
-//        String message = speaker.speak();
+        Speaker speaker = (Speaker)applicationContext.getBean("speaker");
+        String message = speaker.speak();
 //        logger.info(message);
 //        speaker.talk();
 //
-//        Car car = (Car)applicationContext.getBean("carFactoryBean");
-//        logger.info(car.toString());
-//        CarFactoryBean carFactoryBean = (CarFactoryBean)applicationContext.getBean("&carFactoryBean");
-//        logger.info(carFactoryBean.toString());
+        Car car = (Car)applicationContext.getBean("carFactoryBean");
+        logger.info(car.toString());
+        CarFactoryBean carFactoryBean = (CarFactoryBean)applicationContext.getBean("&carFactoryBean");
+        logger.info(carFactoryBean.toString());
+
+        Mobile mobile = (Mobile) applicationContext.getBean("mobile001");
+        mobile.getPrice();
 //
 //        Bed bed1 = (Bed)applicationContext.getBean("bed1");
 //        Bed bed2 = (Bed)applicationContext.getBean("bed2");
@@ -52,8 +55,8 @@ public class MainApp {
 //        FooService fooService = (FooService) applicationContext.getBean("fooService");
 //        fooService.insertFoo (new Foo());
 
-        DefaultFooService fooService = (DefaultFooService) applicationContext.getBean("fooService");
-        fooService.updateFoo(null);
+//        DefaultFooService fooService = (DefaultFooService) applicationContext.getBean("fooService");
+//        fooService.updateFoo(null);
         return;
     }
 

@@ -16,7 +16,7 @@
 
     <context:component-scan base-package="com.liko.spring" />
 
-    <whx:people id="people" name="whx" age="22"></whx:people>
+    <!--<whx:people id="people" name="whx" age="22"></whx:people>-->
 
     <!--bean id="speaker" class="com.liko.spring.Speaker" autowire="byName"-->
     <!--bean id="speaker" class="com.liko.spring.Speaker" autowire="byType"-->
@@ -38,19 +38,21 @@
     </bean>
 
     <!--static factory-->
-    <bean id="bed1" class="com.liko.spring.BedStaticFactory" factory-method="createBed">
-    </bean>
+    <!--<bean id="bed1" class="com.liko.spring.BedStaticFactory" factory-method="createBed">-->
+    <!--</bean>-->
 
     <!--non-static factory-->
-    <bean id="bedNonStaticFactory" class="com.liko.spring.BedNonStaticFactory">
-    </bean>
-    <bean id="bed2" factory-bean="bedNonStaticFactory" factory-method="createBed">
-    </bean>
+    <!--<bean id="bedNonStaticFactory" class="com.liko.spring.BedNonStaticFactory">-->
+    <!--</bean>-->
+    <!--<bean id="bed2" factory-bean="bedNonStaticFactory" factory-method="createBed">-->
+    <!--</bean>-->
 
     <bean id="mobile001" class="com.liko.spring.Mobile" init-method="initMethod" destroy-method="destroyMethod">
         <property name="price" value="399"></property>
     </bean>
+
     <bean id="xBeanPostProcessor" class="com.liko.spring.XBeanPostProcessor"></bean>
+    <bean id="yBeanFactoryPostProcessor" class="com.liko.spring.YBeanFactoryPostProcessor"></bean>
 
     <bean id="eventPublisher" class="com.liko.spring.EventPublisher"></bean>
 
@@ -81,44 +83,44 @@
     <!--</aop:config>-->
 
 
-    <bean id="fooService" class="com.liko.spring.transaction.DefaultFooService"/>
+    <!--<bean id="fooService" class="com.liko.spring.transaction.DefaultFooService"/>-->
 
-    <!-- the transactional advice (what 'happens'; see the <aop:advisor/> bean below) -->
-    <tx:advice id="txAdvice" transaction-manager="txManager">
-        <!-- the transactional semantics... -->
-        <tx:attributes>
-            <!-- all methods starting with 'get' are read-only -->
-            <tx:method name="get*" read-only="true"/>
-            <!-- other methods use the default transaction settings (see below) -->
-            <tx:method name="*"/>
-        </tx:attributes>
-    </tx:advice>
+    <!--&lt;!&ndash; the transactional advice (what 'happens'; see the <aop:advisor/> bean below) &ndash;&gt;-->
+    <!--<tx:advice id="txAdvice" transaction-manager="txManager">-->
+        <!--&lt;!&ndash; the transactional semantics... &ndash;&gt;-->
+        <!--<tx:attributes>-->
+            <!--&lt;!&ndash; all methods starting with 'get' are read-only &ndash;&gt;-->
+            <!--<tx:method name="get*" read-only="true"/>-->
+            <!--&lt;!&ndash; other methods use the default transaction settings (see below) &ndash;&gt;-->
+            <!--<tx:method name="*"/>-->
+        <!--</tx:attributes>-->
+    <!--</tx:advice>-->
 
-    <!-- ensure that the above transactional advice runs for any execution
-        of an operation defined by the FooService interface -->
-    <aop:config>
-        <!--有接口jdk-->
-        <!--<aop:pointcut id="fooServiceOperation" expression="execution(* com.liko.spring.transaction.FooService.*(..))"/>-->
+    <!--&lt;!&ndash; ensure that the above transactional advice runs for any execution-->
+        <!--of an operation defined by the FooService interface &ndash;&gt;-->
+    <!--<aop:config>-->
+        <!--&lt;!&ndash;有接口jdk&ndash;&gt;-->
+        <!--&lt;!&ndash;<aop:pointcut id="fooServiceOperation" expression="execution(* com.liko.spring.transaction.FooService.*(..))"/>&ndash;&gt;-->
 
-        <!--无接口cglib-->
-        <!--<aop:pointcut id="fooServiceOperation" expression="execution(* com.liko.spring.transaction.DefaultFooService.*(..))"/>-->
+        <!--&lt;!&ndash;无接口cglib&ndash;&gt;-->
+        <!--&lt;!&ndash;<aop:pointcut id="fooServiceOperation" expression="execution(* com.liko.spring.transaction.DefaultFooService.*(..))"/>&ndash;&gt;-->
 
-        <aop:pointcut id="fooServiceOperation" expression="execution(* com.liko.spring.transaction.DefaultFooService.insertFoo(..))"/>
+        <!--<aop:pointcut id="fooServiceOperation" expression="execution(* com.liko.spring.transaction.DefaultFooService.insertFoo(..))"/>-->
 
-        <aop:advisor advice-ref="txAdvice" pointcut-ref="fooServiceOperation"/>
-    </aop:config>
+        <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="fooServiceOperation"/>-->
+    <!--</aop:config>-->
 
-    <!-- don't forget the DataSource -->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/latipay"/>
-        <property name="username" value="root"/>
-        <property name="password" value="1234"/>
-    </bean>
+    <!--&lt;!&ndash; don't forget the DataSource &ndash;&gt;-->
+    <!--<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">-->
+        <!--<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>-->
+        <!--<property name="url" value="jdbc:mysql://127.0.0.1:3306/latipay"/>-->
+        <!--<property name="username" value="root"/>-->
+        <!--<property name="password" value="1234"/>-->
+    <!--</bean>-->
 
-    <!-- similarly, don't forget the PlatformTransactionManager -->
-    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+    <!--&lt;!&ndash; similarly, don't forget the PlatformTransactionManager &ndash;&gt;-->
+    <!--<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
 
 </beans>
